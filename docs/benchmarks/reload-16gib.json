@@ -1,0 +1,136 @@
+{
+  "result": "PASS",
+  "adapter": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "texture": "unsigned u32 point tex1Dfetch",
+  "totalVramMiB": 12226.5625,
+  "allocatedVramMiB": 10431.999271392822,
+  "peakResidentStateMiB": 10431.995025634766,
+  "remainingFreeVramMiB": 592.0,
+  "logicalStateMiB": 16383.999984741211,
+  "chains": 153391689,
+  "pages": 257,
+  "residentSlots": 163,
+  "targetTick": 64,
+  "transitionsExecuted": 8589934584,
+  "evictions": 94,
+  "diskReadMiB": 16383.999984741211,
+  "diskWriteMiB": 16383.999984741211,
+  "exactCpuSampleChecks": 771,
+  "seconds": 80.10330990003422,
+  "seedSha256": "a5b796161f461373fc63c02bf1df2753cb0d9f39ac647a691603a019dc2bee47",
+  "nvidiaSmiSamples": [
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 24,
+      "temperatureC": 46
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 16,
+      "temperatureC": 47
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 16,
+      "temperatureC": 47
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 16,
+      "temperatureC": 48
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 8,
+      "temperatureC": 47
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 8,
+      "temperatureC": 47
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 16,
+      "temperatureC": 47
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 16,
+      "temperatureC": 48
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 16,
+      "temperatureC": 49
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 16,
+      "temperatureC": 49
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 8,
+      "temperatureC": 48
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 8,
+      "temperatureC": 48
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 0,
+      "temperatureC": 47
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 0,
+      "temperatureC": 47
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 0,
+      "temperatureC": 47
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 46,
+      "temperatureC": 48
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 0,
+      "temperatureC": 48
+    },
+    {
+      "usedMiB": 10588,
+      "freeMiB": 1357,
+      "utilizationPercent": 8,
+      "temperatureC": 48
+    }
+  ],
+  "peakObservedDeviceUsedMiB": 10588,
+  "peakObservedGpuUtilizationPercent": 46,
+  "date": "2026-10-08",
+  "order": "descending",
+  "fromTick": 8
+}

@@ -1,0 +1,1 @@
+{"name":"klootwijk-kernel","private":true,"type":"module","scripts":{"test":"node tests/core.test.mjs && node tests/machine.test.mjs","build":"node scripts/build.mjs"}}

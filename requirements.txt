@@ -1,0 +1,6 @@
+wgpu==0.32.0
+nvidia-cuda-nvrtc-cu12==12.9.86
+aiortc==1.14.0
+numpy==2.5.3
+cuda-bindings==12.9.9
+nvidia-cuda-runtime-cu12==12.9.79

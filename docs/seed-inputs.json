@@ -1,0 +1,53 @@
+{
+  "format": "TK-SHA256-INPUTS-1",
+  "textEncoding": "UTF-8 after NFC; exact case and whitespace",
+  "hardwareMacEncoding": "lowercase colon-separated octets; current active adapter",
+  "schedule": "256 digest bits, low bit first; bit (logicalTick + globalChainId) mod 256",
+  "inputs": [
+    {
+      "label": "donald trump tower",
+      "sha256": "0d0868602fcad9eca6ffd7824488dbf4395fba60e01da0930afea6b1418015ce"
+    },
+    {
+      "label": "ing amsterdamro",
+      "sha256": "ff2bd71d1de881d3b33670f05703360711bd0fbac9bb606250309576eefeafd5"
+    },
+    {
+      "label": "abn",
+      "sha256": "2236c2b643aa657e67e1a8a323953f7634d5616839635ba770dc76c40dfdd149"
+    },
+    {
+      "label": "bani de banne",
+      "sha256": "73873da0fed02f9db0b0f4f401059b1fbee514db3df6b8ae0ce6199d1045d4f3"
+    },
+    {
+      "label": "chef",
+      "sha256": "f59ac0828b9a32293b348e398a0efd342b1e4377a687f3a9055ee2871dff35e4"
+    },
+    {
+      "label": "buikslotermeerplein",
+      "sha256": "af988b1e14b85b1cb656619ee28c5610cc07d8be47e15bdf885317d6e19f32ba"
+    },
+    {
+      "label": "andere kant van het ij",
+      "sha256": "77e518c16e7487b30da34f1ef6bf244f4d01a9fde7f45932c50e94923480c6a0"
+    },
+    {
+      "label": "winkelcentrumen",
+      "sha256": "6aaee7b4c52dd20a6dff9cebbaddcdcc1b37cb48bf12d4607ce46542c0a229f4"
+    },
+    {
+      "label": "all supplied keyphrases",
+      "phrase": "donald trump tower ing amsterdamro abn bani de banne chef buikslotermeerplein andere kant van het ij winkelcentrumen",
+      "sha256": "a5b796161f461373fc63c02bf1df2753cb0d9f39ac647a691603a019dc2bee47"
+    },
+    {
+      "label": "GPU UUID",
+      "sha256": "98f94eaa35153b0f2f9db818c47d0ff7dc00fe7a8b541c43c428f3fefcf7b95e"
+    },
+    {
+      "label": "active laptop Wi-Fi MAC",
+      "sha256": "dcd97f83cdf5c1d156f4f9897e60cc1485d27a36bb486729cfa4c9d5fcd116aa"
+    }
+  ]
+}

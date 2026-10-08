@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+results/
+.openai/*.tar.gz
+.openai/*.tmp
+node_modules/
+.local/
+swap/
+.openai/hosting.json
+tests/fixtures.json

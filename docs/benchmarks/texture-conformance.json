@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "backend": "texture",
+  "adapter": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "comparedTicks": 8320,
+  "parallelChains": 4096,
+  "parallelTicks": 524288,
+  "parallelSecondsIncludingTransfers": 0.008497400034684688,
+  "tapeChecks": 3,
+  "launchAndSyncSeconds": 0.0004364000051282346
+}
