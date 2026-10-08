@@ -1,0 +1,89 @@
+{
+  "result": "PASS",
+  "adapter": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "texture": "unsigned u32 point tex1Dfetch",
+  "totalVramMiB": 12226.5625,
+  "allocatedVramMiB": 128.00475692749023,
+  "peakResidentStateMiB": 127.99993896484375,
+  "remainingFreeVramMiB": 10896.0,
+  "logicalStateMiB": 255.99998474121094,
+  "chains": 2396745,
+  "pages": 5,
+  "residentSlots": 2,
+  "targetTick": 128,
+  "transitionsExecuted": 306783360,
+  "evictions": 3,
+  "diskReadMiB": 0.0,
+  "diskWriteMiB": 255.99998474121094,
+  "exactCpuSampleChecks": 13,
+  "seconds": 0.37678069999674335,
+  "seedSha256": null,
+  "mode": "pipeline",
+  "cudaTimeline": {
+    "computeMs": 47.66150617599487,
+    "transferMs": 10.71770191192627,
+    "computeTransferOverlapMs": 4.528801918029785,
+    "intervalsMs": {
+      "compute": [
+        [
+          3.4829440116882324,
+          15.297887802124023
+        ],
+        [
+          15.74623966217041,
+          27.64041519165039
+        ],
+        [
+          28.08518409729004,
+          40.01958465576172
+        ],
+        [
+          40.449249267578125,
+          52.24576187133789
+        ],
+        [
+          106.5206069946289,
+          106.74208068847656
+        ]
+      ],
+      "upload": [],
+      "download": [
+        [
+          15.393216133117676,
+          18.00307273864746
+        ],
+        [
+          27.790719985961914,
+          30.357152938842773
+        ],
+        [
+          103.61622619628906,
+          106.38365173339844
+        ],
+        [
+          200.83961486816406,
+          203.60838317871094
+        ],
+        [
+          288.7964172363281,
+          288.8016357421875
+        ]
+      ]
+    },
+    "pinnedHostMiB": 320.0004196166992
+  },
+  "nvidiaSmiSamples": [
+    {
+      "usedMiB": 284,
+      "freeMiB": 11661,
+      "utilizationPercent": 2,
+      "temperatureC": 40
+    }
+  ],
+  "peakObservedDeviceUsedMiB": 284,
+  "peakObservedGpuUtilizationPercent": 2,
+  "date": "2026-10-08",
+  "fromTick": 0,
+  "order": "ascending",
+  "note": "Final parameter layout: separate initialization row and two immutable compute rows."
+}

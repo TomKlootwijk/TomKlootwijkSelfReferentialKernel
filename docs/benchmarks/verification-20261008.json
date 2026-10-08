@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-08",
+  "result": "PASS",
+  "tests": [
+    {
+      "command": ".venv/Scripts/python.exe tests/pipeline_test.py",
+      "schedules": 9,
+      "completeChainsCompared": 3555,
+      "checks": [
+        "serial/pipeline equality",
+        "one-slot and three-slot reuse",
+        "bounded prefetch",
+        "remainder quantum",
+        "custom genes/geometry",
+        "reverse order",
+        "disk resume",
+        "idempotent verified target",
+        "asynchronous writer failure"
+      ]
+    },
+    {
+      "command": ".venv/Scripts/python.exe tests/paged_test.py",
+      "schedules": 9,
+      "completeChainsCompared": 2844,
+      "checks": [
+        "eviction",
+        "reverse order",
+        "resume",
+        "idempotent absolute target",
+        "single writer",
+        "interrupted page commit",
+        "interrupted pass",
+        "checksum damage rejection"
+      ]
+    },
+    {
+      "name": "final revision fresh initialization",
+      "report": "pipeline-fresh-256mib.json"
+    },
+    {
+      "name": "final revision disk reload",
+      "report": "pipeline-reload-256mib.json"
+    },
+    {
+      "name": "catalog SHA-256 recomputation",
+      "inputsVerified": 14
+    }
+  ],
+  "benchmarkValidation": "Every candidate chain status and tick checked; large-set full state checked at first/middle/last chains of each page. Small-store tests compare all states. Peak utilization is sampled device utilization, not sustained occupancy.",
+  "memory": "Logical state beyond device VRAM is persisted as plain checksummed pages; finite buffers and a configured reserve bound allocation.",
+  "execution": "Native CUDA Driver API compute; immutable LUT integer texture fetch; hardware-managed caches."
+}

@@ -1,0 +1,110 @@
+{
+  "result": "PASS",
+  "adapter": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+  "texture": "unsigned u32 point tex1Dfetch",
+  "totalVramMiB": 12226.5625,
+  "allocatedVramMiB": 128.00475692749023,
+  "peakResidentStateMiB": 127.99993896484375,
+  "remainingFreeVramMiB": 10896.0,
+  "logicalStateMiB": 255.99998474121094,
+  "chains": 2396745,
+  "pages": 5,
+  "residentSlots": 2,
+  "targetTick": 136,
+  "transitionsExecuted": 19173960,
+  "evictions": 3,
+  "diskReadMiB": 255.99998474121094,
+  "diskWriteMiB": 255.99998474121094,
+  "exactCpuSampleChecks": 13,
+  "seconds": 0.5579483000328764,
+  "seedSha256": null,
+  "mode": "pipeline",
+  "cudaTimeline": {
+    "computeMs": 3.305889129638672,
+    "transferMs": 21.953514099121094,
+    "computeTransferOverlapMs": 0,
+    "intervalsMs": {
+      "compute": [
+        [
+          59.52656173706055,
+          59.559104919433594
+        ],
+        [
+          62.40812683105469,
+          63.217567443847656
+        ],
+        [
+          101.64924621582031,
+          102.47618865966797
+        ],
+        [
+          138.42530822753906,
+          139.2322540283203
+        ],
+        [
+          180.9832305908203,
+          181.81324768066406
+        ]
+      ],
+      "upload": [
+        [
+          59.393985748291016,
+          59.399295806884766
+        ],
+        [
+          59.7413444519043,
+          62.25801467895508
+        ],
+        [
+          98.98041534423828,
+          101.44671630859375
+        ],
+        [
+          135.97091674804688,
+          138.31613159179688
+        ],
+        [
+          177.8885498046875,
+          180.8560333251953
+        ]
+      ],
+      "download": [
+        [
+          97.67420959472656,
+          97.67996978759766
+        ],
+        [
+          133.3745880126953,
+          135.96640014648438
+        ],
+        [
+          174.3771209716797,
+          177.8836212158203
+        ],
+        [
+          256.4915466308594,
+          259.38446044921875
+        ],
+        [
+          349.9134216308594,
+          352.5689697265625
+        ]
+      ]
+    },
+    "pinnedHostMiB": 320.0004196166992
+  },
+  "nvidiaSmiSamples": [
+    {
+      "usedMiB": 284,
+      "freeMiB": 11661,
+      "utilizationPercent": 0,
+      "temperatureC": 40
+    }
+  ],
+  "peakObservedDeviceUsedMiB": 284,
+  "peakObservedGpuUtilizationPercent": 0,
+  "date": "2026-10-08",
+  "fromTick": 128,
+  "order": "descending",
+  "note": "Final parameter layout; reload to absolute tick 136."
+}

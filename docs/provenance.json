@@ -1,0 +1,25 @@
+{
+  "format": "TK-PROVENANCE-1",
+  "author": {
+    "name": "Tom Klootwijk",
+    "personalIdentifier": "NL200678942",
+    "birthDateProvided": "10-07-1990",
+    "birthDateISO": "1990-07-10",
+    "source": "Author-provided; no identity verification claimed"
+  },
+  "hardwareObservedOn": "2026-10-08",
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+    "uuid": "GPU-072d759c-b0d7-47c0-04e9-48d3e81c9c8d",
+    "pciBusId": "00000000:01:00.0",
+    "macAddress": null,
+    "macNote": "This graphics adapter is not a network adapter; UUID and PCI bus ID identify it"
+  },
+  "laptopNetwork": {
+    "adapter": "Intel(R) Wi-Fi 6E AX211 160MHz",
+    "interface": "Wi-Fi",
+    "macAddress": "9c:67:d6:91:38:c7",
+    "source": "Active physical adapter reported by Get-NetAdapter"
+  },
+  "publication": "Identifiers supplied by the author for inclusion in this public kernel repository"
+}

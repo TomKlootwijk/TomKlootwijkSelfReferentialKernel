@@ -13,7 +13,6 @@ import os
 import pathlib
 import shutil
 import struct
-import subprocess
 import sys
 import time
 from collections import OrderedDict
@@ -297,18 +296,22 @@ class TexturePager:
         count=self.store.count(page);size=count*self.store.stride*4
         self.gpu.call('cuMemcpyDtoHAsync_v2',[C.c_void_p,C.c_uint64,C.c_size_t,C.c_void_p],self.host,entry['slot'],size,self.stream)
         self.sync()
-        state=self.staging[:count*self.store.stride].reshape((count,self.store.stride))
-        if np.any(state[:,3]) or np.any(state[:,1]!=entry['tick']):
-            raise RuntimeError('INVALID/counter mismatch: candidate page was not committed')
-        # Every status/tick is checked; exact CPU comparison samples complete overlays.
-        if entry['tick']<=16384:
-            for index in sorted({0,count//2,count-1}):
-                if state[index].tolist()!=self.reference(page*self.store.page_chains+index,entry['tick']):
-                    raise RuntimeError('GPU/reference mismatch: candidate page was not committed')
-                self.sample_checks+=1
+        self.validate(page,self.staging,entry['tick'])
         self.store.commit(page,self.staging,entry['tick'])
         self.write_bytes+=size
         entry['dirty']=False
+
+    def validate(self, page, array, tick):
+        count=self.store.count(page)
+        state=array[:count*self.store.stride].reshape((count,self.store.stride))
+        if np.any(state[:,3]) or np.any(state[:,1]!=tick):
+            raise RuntimeError('INVALID/counter mismatch: candidate page was not committed')
+        # Every status/tick is checked; exact CPU comparison samples complete overlays.
+        if tick<=16384:
+            for index in sorted({0,count//2,count-1}):
+                if state[index].tolist()!=self.reference(page*self.store.page_chains+index,tick):
+                    raise RuntimeError('GPU/reference mismatch: candidate page was not committed')
+                self.sample_checks+=1
 
     def flush_all(self):
         for page in self.resident:
@@ -341,6 +344,7 @@ def main():
     ap.add_argument('--page-mib',type=int,default=64)
     ap.add_argument('--ticks',type=int,default=8,help='Absolute accepted tick to reach, also on resume')
     ap.add_argument('--quantum',type=int,default=8)
+    ap.add_argument('--mode',choices=['pipeline','serial'],default='pipeline')
     ap.add_argument('--profile',type=pathlib.Path,help='Plain pinion geometry/turns/gains JSON for a new store')
     seeds=ap.add_mutually_exclusive_group()
     seeds.add_argument('--seed-phrase')
@@ -367,30 +371,29 @@ def main():
         store.close()
         ap.error('Resuming a custom world requires the original --profile')
     try:
-        engine=TexturePager(store,args.vram_mib*MiB,args.headroom_mib*MiB)
+        if args.mode=='pipeline':
+            from pipelined import PipelinedPager
+            engine=PipelinedPager(store,args.vram_mib*MiB,args.headroom_mib*MiB)
+        else:engine=TexturePager(store,args.vram_mib*MiB,args.headroom_mib*MiB)
     except BaseException:
         store.close()
         raise
     started=time.perf_counter()
-    telemetry=[]
+    from telemetry import Telemetry
+    telemetry=Telemetry()
+    telemetry.start()
     try:
         print(json.dumps(dict(event='admitted',adapter=engine.gpu.name,residentMiB=engine.allocated_bytes/MiB,
                              logicalMiB=store.logical_bytes/MiB,slots=len(engine.slots),pages=store.page_count,
-                             totalVramMiB=engine.total_bytes/MiB,seedSha256=store.digest)),flush=True)
-        pages=range(store.page_count-1,-1,-1) if args.reverse else range(store.page_count)
+                             totalVramMiB=engine.total_bytes/MiB,seedSha256=store.digest,mode=args.mode)),flush=True)
+        pages=list(range(store.page_count-1,-1,-1) if args.reverse else range(store.page_count))
         for sequence,page in enumerate(pages):
+            if args.mode=='pipeline' and sequence+1<len(pages):engine.prefetch(pages[sequence+1])
             engine.advance(page,args.ticks,args.quantum)
             if sequence%16==0:
-                print(json.dumps(dict(event='progress',completed=sequence+1,pages=store.page_count,
+                print(json.dumps(dict(event='progress',submittedPages=sequence+1,pages=store.page_count,
+                    durableAtTarget=sum(v['tick']==args.ticks for v in store.manifest['pages'].values()),
                     residentWorkingMiB=engine.peak_bytes/MiB,evictions=engine.evictions)),flush=True)
-            if sequence%16==0 or sequence+1==len(engine.slots):
-                try:
-                    values=subprocess.check_output(['nvidia-smi','--id=0',
-                        '--query-gpu=memory.used,memory.free,utilization.gpu,temperature.gpu',
-                        '--format=csv,noheader,nounits'],text=True,timeout=5).strip().split(',')
-                    telemetry.append(dict(usedMiB=int(values[0]),freeMiB=int(values[1]),
-                        utilizationPercent=int(values[2]),temperatureC=int(values[3])))
-                except (OSError,ValueError,subprocess.SubprocessError):pass
         engine.flush_all()
         free,_=engine.memory_info()
         report=dict(result='PASS',adapter=engine.gpu.name,texture='unsigned u32 point tex1Dfetch',
@@ -400,15 +403,22 @@ def main():
                     residentSlots=len(engine.slots),targetTick=args.ticks,transitionsExecuted=engine.steps_executed,
                     evictions=engine.evictions,diskReadMiB=engine.read_bytes/MiB,diskWriteMiB=engine.write_bytes/MiB,
                     exactCpuSampleChecks=engine.sample_checks,seconds=time.perf_counter()-started,
-                    store=str(store.directory),seedSha256=store.digest)
-        if telemetry:
-            report['nvidiaSmiSamples']=telemetry
-            report['peakObservedDeviceUsedMiB']=max(s['usedMiB'] for s in telemetry)
-            report['peakObservedGpuUtilizationPercent']=max(s['utilizationPercent'] for s in telemetry)
+                    store=str(store.directory),seedSha256=store.digest,mode=args.mode)
+        if args.mode=='pipeline':report['cudaTimeline']=engine.timing_report()
+        telemetry.close()
+        if telemetry.samples:
+            report['nvidiaSmiSamples']=telemetry.samples
+            report['peakObservedDeviceUsedMiB']=max(s['usedMiB'] for s in telemetry.samples)
+            report['peakObservedGpuUtilizationPercent']=max(s['utilizationPercent'] for s in telemetry.samples)
         args.out.parent.mkdir(parents=True,exist_ok=True)
         atomic_json(args.out,report)
-        print(json.dumps(report,indent=2),flush=True)
+        display=dict(report)
+        display.pop('nvidiaSmiSamples',None)
+        if 'cudaTimeline' in display:
+            display['cudaTimeline']={k:v for k,v in display['cudaTimeline'].items() if k!='intervalsMs'}
+        print(json.dumps(display,indent=2),flush=True)
     finally:
+        telemetry.close()
         engine.close()
         store.close()
 

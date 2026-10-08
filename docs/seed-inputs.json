@@ -43,11 +43,28 @@
     },
     {
       "label": "GPU UUID",
-      "sha256": "98f94eaa35153b0f2f9db818c47d0ff7dc00fe7a8b541c43c428f3fefcf7b95e"
+      "sha256": "98f94eaa35153b0f2f9db818c47d0ff7dc00fe7a8b541c43c428f3fefcf7b95e",
+      "phrase": "GPU-072d759c-b0d7-47c0-04e9-48d3e81c9c8d"
     },
     {
       "label": "active laptop Wi-Fi MAC",
-      "sha256": "dcd97f83cdf5c1d156f4f9897e60cc1485d27a36bb486729cfa4c9d5fcd116aa"
+      "sha256": "dcd97f83cdf5c1d156f4f9897e60cc1485d27a36bb486729cfa4c9d5fcd116aa",
+      "phrase": "9c:67:d6:91:38:c7"
+    },
+    {
+      "label": "author name",
+      "phrase": "Tom Klootwijk",
+      "sha256": "9145e30560748a89f6a3a9ad2cec1955e3ed92e6d3b497e8ed70ead6cee7dd23"
+    },
+    {
+      "label": "author-provided identifier",
+      "phrase": "NL200678942",
+      "sha256": "0cc84880081367571f3566c9d6dc40197aaf2d98a9aac466d945d3ebded0438b"
+    },
+    {
+      "label": "author-provided birth date",
+      "phrase": "10-07-1990",
+      "sha256": "bddff09c5f8ba82b547c2f6d4b660cba3aa10efce3b0ef2e0ba020d36073860d"
     }
   ]
 }
